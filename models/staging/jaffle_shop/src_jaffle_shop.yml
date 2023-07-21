@@ -2,8 +2,24 @@ version: 2
 
 sources:
   - name: jaffle_shop
+    description: Sample dataset for an postgres application for jaffle shop
     database: dbt_labs  
     schema: public  
     tables:
       - name: jaffle_shop_orders
+        description: Customer orders
+        columns:
+          - name: id
+            description: primary key for jaffle_shop_orders at database level
+            tests:
+              - unique
+              - not_null
+            
       - name: jaffle_shop_customers
+        columns:
+          - name: id
+            description: primary key for jaffle_shop_customers at database level
+            tests:
+              - unique
+              - not_null
+              
