@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: stripe
+    description: stripe payment related data for jaffle shop
+    database: dbt_labs
+    schema: public
+    tables:
+      - name: stripe_payments

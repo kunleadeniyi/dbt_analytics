@@ -1,0 +1,35 @@
+version: 2
+
+# generating generic tests
+
+models:
+  - name: stg_customers
+    description: staging table for the jaffle_shop_customers source table with renamed columns
+    columns:
+      - name: customer_id
+        description: primary key for customers
+        tests:
+          - unique
+          - not_null
+          
+  - name: stg_orders
+    description: staging table for customer orders, source table is jaffle_shop_orders
+    columns:
+      - name: order_id
+        description: primary key for customer orders
+        tests:
+          - unique
+          - not_null
+
+      - name: status
+        description: "{{ doc('order_status')}}"
+        tests:
+          - accepted_values:
+              values: ['returned', 'return_pending', 'completed', 'placed', 'shipped']
+      
+      - name: customer_id
+        tests:
+          - relationships:
+              to: ref('stg_customers')
+              field: customer_id
+          
